@@ -29,7 +29,7 @@ function filtrarUsuarios() {
   for (var i = 0; i < usuarios.length; i++) {
     var usuario = usuarios[i];
     var nombre = usuario.nombre.toUpperCase();
-    var ip = usuario.impresora.toUpperCase();
+    var ip = usuario.ip.toUpperCase(); // Nuevo campo "ip" agregado
 
     if (nombre.includes(filtro) || ip.includes(filtro)) {
       var fila = tablaUsuarios.insertRow();
@@ -43,55 +43,62 @@ function filtrarUsuarios() {
                        '<td>' + usuario.sector + '</td>' +
                        '<td>' + usuario.interno + '</td>' +
                        '<td>' + usuario.email + '</td>' +
-                       '<td>' + usuario.impresora + '</td>';
+                       '<td>' + usuario.impresora + '</td>' +
+                       '<td>' + usuario.ip + '</td>'; // Nuevo campo "ip" agregado
     }
   }
 }
 
 function guardarUsuario(event) {
-    event.preventDefault();
-  
-    var nombre = document.getElementById("nombre").value;
-    var apellido = document.getElementById("apellido").value;
-    var empresa = document.getElementById("empresa").value;
-    var servidores = document.getElementById("servidores").value;
-    var usuario = document.getElementById("usuario").value;
-    var contraseña = document.getElementById("contraseña").value;
-    var sector = document.getElementById("sector").value;
-    var interno = document.getElementById("interno").value;
-    var email = document.getElementById("email").value;
-    var impresora = document.getElementById("impresora").value;
-  
-    var data = new FormData();
-    data.append("nombre", nombre);
-    data.append("apellido", apellido);
-    data.append("empresa", empresa);
-    data.append("servidores", servidores);
-    data.append("usuario", usuario);
-    data.append("contraseña", contraseña);
-    data.append("sector", sector);
-    data.append("interno", interno);
-    data.append("email", email);
-    data.append("impresora", impresora);
-  
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "guardar_usuario.php", true);
-    xhr.onload = function () {
+  event.preventDefault();
+
+  var id = document.getElementById("id").value; // Nuevo campo "id" agregado
+  var nombre = document.getElementById("nombre").value;
+  var apellido = document.getElementById("apellido").value;
+  var empresa = document.getElementById("empresa").value;
+  var servidores = document.getElementById("servidores").value;
+  var usuario = document.getElementById("usuario").value;
+  var contraseña = document.getElementById("contraseña").value;
+  var sector = document.getElementById("sector").value;
+  var interno = document.getElementById("interno").value;
+  var email = document.getElementById("email").value;
+  var impresora = document.getElementById("impresora").value;
+  var ip = document.getElementById("ip").value; // Nuevo campo "ip" agregado
+
+  var data = new FormData();
+  data.append("id", id); // Nuevo campo "id" agregado
+  data.append("nombre", nombre);
+  data.append("apellido", apellido);
+  data.append("empresa", empresa);
+  data.append("servidores", servidores);
+  data.append("usuario", usuario);
+  data.append("contraseña", contraseña);
+  data.append("sector", sector);
+  data.append("interno", interno);
+  data.append("email", email);
+  data.append("impresora", impresora);
+  data.append("ip", ip); // Nuevo campo "ip" agregado
+
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "guardar_usuario.php", true);
+  xhr.onload = function () {
     if (xhr.status === 200) {
-    var response = xhr.responseText;
-    if (response === "success") {
-    // Limpiar el formulario
-    document.getElementById("formulario").reset();
+      var response = xhr.responseText;
+      if (response === "success") {
+        // Limpiar el formulario
+        document.getElementById("formulario").reset();
         // Mostrar mensaje de éxito
         alert("Usuario guardado exitosamente.");
-    } else {
-      // Mostrar mensaje de error
-      alert("Error al guardar el usuario.");
+      } else {
+        // Mostrar mensaje de error
+        alert("Error al guardar el usuario.");
+      }
     }
-  }
-};
-xhr.send(data);
-}// Cargar usuarios al cargar la página
+  };
+  xhr.send(data);
+}
+
+// Cargar usuarios al cargar la página
 window.onload = function () {
-    cargarUsuarios();
-    }; 
+  cargarUsuarios();
+};

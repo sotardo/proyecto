@@ -8,7 +8,11 @@
 <body>
   <h1>Formulario de carga de usuarios</h1>
   
-  <form action="guardar_usuario.php" method="POST">
+  <form id="formulario" action="guardar_usuario.php" method="POST">
+    <div>
+      <label for="id">ID:</label>
+      <input type="text" id="id" name="id" placeholder="ID" required>
+    </div>
     <div>
       <label for="nombre">Nombre:</label>
       <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
@@ -19,7 +23,11 @@
     </div>
     <div>
       <label for="empresa">Empresa:</label>
-      <input type="text" id="empresa" name="empresa" placeholder="Empresa" required>
+      <select id="empresa" name="empresa" required>
+        <option value="pire">Pire</option>
+        <option value="valley">Valley</option>
+        <option value="hicsa">Hicsa</option>
+      </select>
     </div>
     <div>
       <label for="servidores">Servidores:</label>
@@ -48,11 +56,12 @@
     <div>
       <label for="impresora">Impresora:</label>
       <input type="text" id="impresora" name="impresora" placeholder="Impresora" required>
-
+    </div>
+    <div>
+      <label for="ip">IP:</label>
+      <input type="text" id="ip" name="ip" placeholder="IP" required>
     </div>
     <button type="submit">Guardar</button>
   </form>
-  
-  <script src="script.js"></script>
 </body>
 </html>
